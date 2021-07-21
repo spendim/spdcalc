@@ -78,24 +78,29 @@ Crystals('BBO-1', {
  */
 Crystals('KTP-3', {
     name: 'KTP ref 1',
-    // info: 'H. Vanherzeele, J. D. Bierlein, F. C. Zumsteg, Appl. Opt., 27, 3314 (1988)',
-    info: 'Includes Franco Wong"s modificatin.  http://dx.doi.org/10.1063/1.1668320, http://www.redoptronics.com/KTP-crystal.html',
+    info: 'H. Vanherzeele, J. D. Bierlein, F. C. Zumsteg, Appl. Opt., 27, 3314 (1988)',
+    // changed Sellmeier coefficients to match KTP_H from SNLO software
+    // info: 'Includes Franco Wong"s modificatin.  http://dx.doi.org/10.1063/1.1668320, http://www.redoptronics.com/KTP-crystal.html',
     indicies: function(lambda, temp){
         lambda = lambda * 1e6; //Convert for Sellmeir Coefficients
         var lambda_sq = sq(lambda);
 
         // http://www.redoptronics.com/KTP-crystal.html
-        var nx= Math.sqrt(2.10468 + 0.89342*lambda_sq/(lambda_sq-0.04438)-0.01036*lambda_sq);
-        var ny;
+        // var nx= Math.sqrt(2.10468 + 0.89342*lambda_sq/(lambda_sq-0.04438)-0.01036*lambda_sq);
+        var nx= Math.sqrt(2.1146 + 0.89188*lambda_sq/(lambda_sq-0.20861)-0.01320*lambda_sq);
+        
+        // var ny;
+        ny= Math.sqrt(2.1518 + 0.87862*lambda_sq/(lambda_sq-0.21801)-0.01327*lambda_sq);
+        
+        // if (lambda< 1.2){
+        //     ny= Math.sqrt(2.14559 + 0.87629*lambda_sq/(lambda_sq-0.0485)-0.01173*lambda_sq);
+        // }
+        // else {
+        //     ny= Math.sqrt(2.0993 + 0.922683*lambda_sq/(lambda_sq-0.0467695)-0.0138408*lambda_sq);
+        // }
 
-        if (lambda< 1.2){
-            ny= Math.sqrt(2.14559 + 0.87629*lambda_sq/(lambda_sq-0.0485)-0.01173*lambda_sq);
-        }
-        else {
-            ny= Math.sqrt(2.0993 + 0.922683*lambda_sq/(lambda_sq-0.0467695)-0.0138408*lambda_sq);
-        }
-
-        var nz= Math.sqrt(1.9446 + 1.3617*lambda_sq/(lambda_sq-0.047)-0.01491* lambda_sq);
+        // var nz= Math.sqrt(1.9446 + 1.3617*lambda_sq/(lambda_sq-0.047)-0.01491* lambda_sq);
+        var nz= Math.sqrt(2.3136 + 1.00012*lambda_sq/(lambda_sq-0.23831)-0.01679* lambda_sq);
 
         var dnx= 1.1e-5;
         var dny= 1.3e-5;
